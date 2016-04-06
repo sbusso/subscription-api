@@ -11,7 +11,10 @@ gem 'comcenter_api', :git => 'https://github.com/sbusso/subscription-api.git'
 
 ``` ruby
 # Creating client
-@api = ComcenterApi::Client.new(api_key: 'your-api-key', url_prefix: 'http://api-url.etc').api
+@api = ComcenterApi::Client.new(api_key: 'your-api-key', url_prefix: 'http://api-url.etc')
 
-# and call methods
-@api.channel_index
+# show channels
+@api.channel.index
+
+# show subscribers for channel 1
+@api.subscription.index(1)
