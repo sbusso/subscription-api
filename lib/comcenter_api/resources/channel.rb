@@ -4,9 +4,7 @@ module ComcenterApi
 
       # Channel index.
       def index
-        method = :get
-        path = "/channels"
-        call(method: method, path: path)
+        call(method: :get, path: "/channels")
       end
 
     end
