@@ -3,7 +3,6 @@ require 'pry'
 require 'awesome_print'
 require 'webmock/rspec'
 require 'uri'
-# require_relative './support/mechanized_authorization'
 
 RSpec.configure do |config|
   config.raise_errors_for_deprecations!

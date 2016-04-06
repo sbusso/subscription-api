@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-describe ComcenterApi::API do
+describe ComcenterApi::Resources::Base do
 
-  let (:api_key) { "API key" }
+  let (:api_key) { "api-key" }
   let (:url_prefix) { "http://site.com/api" }
   let(:client)  { ComcenterApi::Client.new(api_key: api_key, url_prefix: url_prefix) }
-  let(:api) { ComcenterApi::API.new(client: client) }
+  let(:api) { ComcenterApi::Resources::Base.new(client: client) }
 
   describe "initialize" do
     context "with credentials" do
@@ -31,7 +31,6 @@ describe ComcenterApi::API do
       end
     end
   end
-
 
 
 end
