@@ -32,18 +32,23 @@ module ComcenterApi
         # @param [String] path Relative path for api method call.
         # @param [Hash] data Other options.
         # @return [Hash]
-        def call(method:, path:, data:{})
+        def call(method:, path:, data:{}, &block)
           params = compose_params(method: method, path: path, data: data)
-          execute_request(params)
+          execute_request(params, &block)
         end
 
         # Call api via http.
         # @param [Symbol] params RestClient::Request.execute params.
         # @return [Hash]
-        def execute_request(params)
-          JSON.parse(RestClient::Request.execute params)
-        rescue JSON::ParserError => e
-          {error: e.message}
+        def execute_request(params, &block)
+          block ? block.call(restclient_exec(params), nil) : restclient_exec(params)
+        rescue RestClient::Exception, JSON::ParserError => e
+          block ? block.call(nil, {error: e.message}) : {error: e.message}
+        end
+
+        # RestClient request
+        def restclient_exec(params)
+          JSON.pasrse RestClient::Request.execute(params)
         end
 
         # Compose url

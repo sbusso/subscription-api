@@ -3,8 +3,8 @@ module ComcenterApi
     class Channel < Base
 
       # Channel index.
-      def list
-        call(method: :get, path: "/channels")
+      def list(&block)
+        call(method: :get, path: "/channels", &block)
       end
 
     end
