@@ -48,7 +48,7 @@ module ComcenterApi
 
         # RestClient request
         def restclient_exec(params)
-          JSON.pasrse RestClient::Request.execute(params)
+          JSON.parse RestClient::Request.execute(params)
         end
 
         # Compose url
