@@ -3,6 +3,7 @@ module ComcenterApi
   require 'yaml'
   require 'hashie'
   require 'rest-client'
+  require 'active_support/inflector'
 
   require 'comcenter_api/api_accessor'
   require 'comcenter_api/resources/base'

@@ -42,11 +42,12 @@ module ComcenterApi
         resources.each {|resource| define_resource_method(resource)}
       end
 
-      # Creates methods for api resources
+      # Creates getters for api resources. Getters names - pluralized resource names.
+      # E.g. resouce channel, method: channels, etc
       # @param [string] Resources Array of resources.
       # @return [Instance] instance of api resource
       def define_resource_method(resource)
-        define_method resource do
+        define_method resource.to_s.pluralize do
           set_resource_variable(resource) if !instance_variable_defined?(instance_variable_name(resource))
           instance_variable_get(instance_variable_name(resource))
         end

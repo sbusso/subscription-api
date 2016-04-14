@@ -26,11 +26,11 @@ describe ComcenterApi::Client do
 
   describe "use api resources" do
     it "use channel resource" do
-      expect(client.channel).to be_an_instance_of(ComcenterApi::Resources::Channel)
+      expect(client.channels).to be_an_instance_of(ComcenterApi::Resources::Channel)
     end
 
     it "use subscription resource" do
-      expect(client.subscription).to be_an_instance_of(ComcenterApi::Resources::Subscription)
+      expect(client.subscriptions).to be_an_instance_of(ComcenterApi::Resources::Subscription)
     end
   end
 

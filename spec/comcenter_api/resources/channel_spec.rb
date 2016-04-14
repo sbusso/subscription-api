@@ -13,10 +13,10 @@ describe ComcenterApi::Resources::Channel do
   end
 
   describe "Api methods" do
-      it "channel index" do
+      it "channels index" do
         stub_request(:get, /.*#{compose_url("\/channels")}/).
         to_return(:body => {channels:[]}.to_json )
-        expect(api.index).to include("channels")
+        expect(api.list).to include("channels")
       end
   end
 

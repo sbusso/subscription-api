@@ -14,10 +14,10 @@ describe ComcenterApi::Resources::Subscription do
 
   describe "Api methods" do
 
-      it "subscription index" do
+      it "subscriptions list" do
         body_response = {subscriptions:[]}.to_json
         stub_request(:get, /.*#{compose_url("\/channels\/1\/subscriptions")}/).to_return(:body => body_response)
-        expect(api.index(1)).to include("subscriptions")
+        expect(api.list(channel_id: 1)).to include("subscriptions")
       end
 
       it "subscription create" do
@@ -25,7 +25,7 @@ describe ComcenterApi::Resources::Subscription do
         stub_request(:post, /.*#{compose_url("\/channels\/1\/subscriptions")}/).
         with(body: {email: email}).
         to_return(:body => {email: email}.to_json)
-        expect(api.create(1, email: email).to_s).to include(email)
+        expect(api.create(channel_id: 1, email: email).to_s).to include(email)
       end
 
       it "subscription destroy" do
@@ -33,7 +33,7 @@ describe ComcenterApi::Resources::Subscription do
         stub_request(:delete, /.*#{compose_url("\/channels\/1\/subscriptions")}/).
         with(body: {email: email}).
         to_return(:body => {message: "unsubscribed"}.to_json)
-        expect(api.destroy(1, email: email).to_s).to include("unsubscribed")
+        expect(api.destroy(channel_id: 1, email: email).to_s).to include("unsubscribed")
       end
 
   end

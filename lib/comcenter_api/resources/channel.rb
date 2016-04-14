@@ -3,7 +3,7 @@ module ComcenterApi
     class Channel < Base
 
       # Channel index.
-      def index
+      def list
         call(method: :get, path: "/channels")
       end
 
