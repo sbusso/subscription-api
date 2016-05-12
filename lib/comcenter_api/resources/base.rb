@@ -3,10 +3,11 @@ module ComcenterApi
 
     autoload :Channel, 'comcenter_api/resources/channel'
     autoload :Subscription, 'comcenter_api/resources/subscription'
+    autoload :List, 'comcenter_api/resources/list'
 
     class Base
 
-      RESOURCES_LIST = [:channel, :subscription]
+      RESOURCES_LIST = [:channel, :subscription, :list]
 
       attr_reader :client
 

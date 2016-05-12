@@ -16,24 +16,24 @@ describe ComcenterApi::Resources::Subscription do
 
       it "subscriptions list" do
         body_response = {subscriptions:[]}.to_json
-        stub_request(:get, /.*#{compose_url("\/channels\/1\/subscriptions")}/).to_return(:body => body_response)
-        expect(api.list(channel_id: 1)).to include("subscriptions")
+        stub_request(:get, /.*#{compose_url("\/lists\/1\/subscriptions")}/).to_return(:body => body_response)
+        expect(api.list(list_id: 1)).to include("subscriptions")
       end
 
       it "subscription create" do
         email = "email@example.com"
-        stub_request(:post, /.*#{compose_url("\/channels\/1\/subscriptions")}/).
+        stub_request(:post, /.*#{compose_url("\/lists\/1\/subscriptions")}/).
         with(body: {email: email}).
         to_return(:body => {email: email}.to_json)
-        expect(api.create(channel_id: 1, email: email).to_s).to include(email)
+        expect(api.create(list_id: 1, email: email).to_s).to include(email)
       end
 
       it "subscription destroy" do
         email = "email@example.com"
-        stub_request(:delete, /.*#{compose_url("\/channels\/1\/subscriptions")}/).
+        stub_request(:delete, /.*#{compose_url("\/lists\/1\/subscriptions")}/).
         with(body: {email: email}).
         to_return(:body => {message: "unsubscribed"}.to_json)
-        expect(api.destroy(channel_id: 1, email: email).to_s).to include("unsubscribed")
+        expect(api.destroy(list_id: 1, email: email).to_s).to include("unsubscribed")
       end
 
   end

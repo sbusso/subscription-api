@@ -32,6 +32,10 @@ describe ComcenterApi::Client do
     it "use subscription resource" do
       expect(client.subscriptions).to be_an_instance_of(ComcenterApi::Resources::Subscription)
     end
+
+    it "use list resource" do
+      expect(client.lists).to be_an_instance_of(ComcenterApi::Resources::List)
+    end
   end
 
 end
