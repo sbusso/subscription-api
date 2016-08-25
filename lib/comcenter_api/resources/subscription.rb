@@ -29,6 +29,34 @@ module ComcenterApi
         )
       end
 
+      # Add tags for subscription
+      # @param [Integer] list_id
+      # @param [String] email
+      # @param [String] tags
+      # @param [Hash] options: payload, etc
+      def tag(**options, &block)
+        call(
+          method: :post,
+          path: "/lists/#{options.delete(:list_id)}/subscriptions/tag",
+          data: options,
+          &block
+        )
+      end
+
+      # Add external event for subscription
+      # @param [Integer] list_id
+      # @param [String] email
+      # @param [String] event
+      # @param [Hash] options: payload, etc
+      def event(**options, &block)
+        call(
+          method: :post,
+          path: "/lists/#{options.delete(:list_id)}/subscriptions/event",
+          data: options,
+          &block
+        )
+      end
+
     end
   end
 end
