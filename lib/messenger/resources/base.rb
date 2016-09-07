@@ -1,9 +1,9 @@
-module ComcenterApi
+module Messenger
   module Resources
 
-    autoload :Channel, 'comcenter_api/resources/channel'
-    autoload :Subscription, 'comcenter_api/resources/subscription'
-    autoload :List, 'comcenter_api/resources/list'
+    autoload :Channel, 'messenger/resources/channel'
+    autoload :Subscription, 'messenger/resources/subscription'
+    autoload :List, 'messenger/resources/list'
 
     class Base
 
@@ -70,6 +70,6 @@ module ComcenterApi
             user: api_key
           }
         end
-      end
+    end
   end
 end

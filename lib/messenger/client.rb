@@ -1,4 +1,4 @@
-module ComcenterApi
+module Messenger
   # A class representing a connection to ComcenterApi. It holds the username and password.
   class Client
 
