@@ -66,10 +66,17 @@ module ComcenterApi
           {
             method: method,
             url: compose_api_url(path),
-            payload: data,
+            payload: amend_params(data),
             user: api_key
           }
         end
+
+        def amend_params(data)
+          params = {}
+          data.each{ |k,v| v.is_a?(Array) ? params["#{k}[]"] = v : params[k] = v}
+          params
+        end
+
       end
   end
 end

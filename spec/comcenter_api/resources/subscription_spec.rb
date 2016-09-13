@@ -16,25 +16,45 @@ describe ComcenterApi::Resources::Subscription do
         expect(api.list(list_id: 1)).to include("subscriptions")
       end
 
-      it "subscription create" do
+      it "single subscription create" do
         email = "email@example.com"
         stub_request(:post, "http://api-key:@site.com/api/lists/1/subscriptions")
-          .with(body: {email: email})
-          .to_return(:body => {email: email}.to_json)
-        expect(api.create(list_id: 1, email: email).to_s).to include(email)
+          .with(body: {member: {email: email}})
+          .to_return(:body => {message: "subscribed"}.to_json)
+        expect(api.create(list_id: 1, member: {email: email}).to_s).to include('subscribed')
       end
 
-      it "subscription destroy" do
+      it "multiple subscription create" do
+        email1 = "email@example.com"
+        email2 = "email2@example.com"
+        members = [{email: email1}, {email: email2}]
+        stub_request(:post, "http://api-key:@site.com/api/lists/1/subscriptions")
+          .with(body: {members: members})
+          .to_return(:body => {message: "subscribed"}.to_json)
+        expect(api.create(list_id: 1, members: members).to_s).to include('subscribed')
+      end
+
+      it "single subscription destroy" do
         email = "email@example.com"
         stub_request(:delete, "http://api-key:@site.com/api/lists/1/subscriptions")
-          .with(body: {email: email})
+          .with(body: {member: {email: email}})
           .to_return(:body => {message: "unsubscribed"}.to_json)
-        expect(api.destroy(list_id: 1, email: email).to_s).to include("unsubscribed")
+        expect(api.destroy(list_id: 1, member: {email: email}).to_s).to include("unsubscribed")
+      end
+
+      it "multiple subscription destroy" do
+        email1 = "email@example.com"
+        email2 = "email2@example.com"
+        members = [{email: email1}, {email: email2}]
+        stub_request(:delete, "http://api-key:@site.com/api/lists/1/subscriptions")
+          .with(body: {members: members})
+          .to_return(:body => {message: "unsubscribed"}.to_json)
+        expect(api.destroy(list_id: 1, members: members).to_s).to include("unsubscribed")
       end
 
       it "subscription tag" do
         email = "email@example.com"
-        tags = ["tag0"]
+        tags = ["tag0", "tag1"]
         stub_request(:post, "http://api-key:@site.com/api/lists/1/subscriptions/tag")
           .with(body: {email: email, tags: tags})
           .to_return(:body => {message: "Tag(s) was added to subscription"}.to_json)
