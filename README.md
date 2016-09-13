@@ -2,7 +2,7 @@
 
 ``` ruby
 # Gemfile
-gem 'comcenter_api', github: 'sbusso/subscription-api'
+gem 'messenger', github: 'turfmedia/messenger-client'
 ```
 
 ## Using
@@ -11,7 +11,7 @@ gem 'comcenter_api', github: 'sbusso/subscription-api'
 
 ``` ruby
 # Creating client
-@api = ComcenterApi::Client.new(api_key: 'your-api-key', url_prefix: 'http://api-url.etc')
+@api = Messenger::Client.new(api_key: 'your-api-key', url_prefix: 'http://api-url.etc')
 
 # show channels
 @api.channels.list

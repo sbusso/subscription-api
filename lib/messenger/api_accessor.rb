@@ -1,4 +1,4 @@
-module ComcenterApi
+module Messenger
 
   # Module for api methods accessing
   module ApiAccessor
@@ -11,7 +11,7 @@ module ComcenterApi
     # Return resources namespace.
     # @return [String]
     def resource_namespace
-      "ComcenterApi::Resources"
+      "Messenger::Resources"
     end
 
     # Converts string to instance variable name

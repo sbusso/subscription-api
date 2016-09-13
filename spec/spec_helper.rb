@@ -1,4 +1,4 @@
-require 'comcenter_api'
+require 'messenger'
 require 'pry'
 require 'awesome_print'
 require 'webmock/rspec'

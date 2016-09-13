@@ -1,9 +1,9 @@
-module ComcenterApi
+module Messenger
   module Resources
 
-    autoload :Channel, 'comcenter_api/resources/channel'
-    autoload :Subscription, 'comcenter_api/resources/subscription'
-    autoload :List, 'comcenter_api/resources/list'
+    autoload :Channel, 'messenger/resources/channel'
+    autoload :Subscription, 'messenger/resources/subscription'
+    autoload :List, 'messenger/resources/list'
 
     class Base
 
@@ -71,12 +71,13 @@ module ComcenterApi
           }
         end
 
+        # if used array with hash we need to update key
         def amend_params(data)
           params = {}
           data.each{ |k,v| v.is_a?(Array) ? params["#{k}[]"] = v : params[k] = v}
           params
         end
 
-      end
+    end
   end
 end

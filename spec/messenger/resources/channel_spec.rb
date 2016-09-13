@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-describe ComcenterApi::Resources::Channel do
+describe Messenger::Resources::Channel do
 
   let (:api_key) { "api-key" }
   let (:url_prefix) { "http://site.com/api" }
-  let(:client)  { ComcenterApi::Client.new(api_key: api_key, url_prefix: url_prefix) }
-  let(:api) { ComcenterApi::Resources::Channel.new(client: client) }
+  let(:client)  { Messenger::Client.new(api_key: api_key, url_prefix: url_prefix) }
+  let(:api) { Messenger::Resources::Channel.new(client: client) }
 
   def compose_url(path)
     prefix = URI(url_prefix)

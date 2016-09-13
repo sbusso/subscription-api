@@ -1,4 +1,4 @@
-module ComcenterApi
+module Messenger
   module Resources
     class Subscription < Base
 

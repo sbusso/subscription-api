@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-describe ComcenterApi::Resources::Base do
+describe Messenger::Resources::Base do
 
   let (:api_key) { "api-key" }
   let (:url_prefix) { "http://site.com/api" }
-  let(:client)  { ComcenterApi::Client.new(api_key: api_key, url_prefix: url_prefix) }
-  let(:api) { ComcenterApi::Resources::Base.new(client: client) }
+  let(:client)  { Messenger::Client.new(api_key: api_key, url_prefix: url_prefix) }
+  let(:api) { Messenger::Resources::Base.new(client: client) }
 
   describe "initialize" do
     context "with credentials" do
