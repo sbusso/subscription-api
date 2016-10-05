@@ -2,56 +2,70 @@ module Messenger
   module Resources
     class Subscription < Base
 
-      # List of list members
-      def list(list_id:, &block)
-        call(method: :get, path: "/lists/#{list_id}/subscriptions", &block)
+      # List of site members
+      def list(site_id:, &block)
+        call(method: :get, path: "/sites/#{site_id}/subscriptions", &block)
       end
 
-      # Add member to list.
-      # @param [Hash] options List parameters: email, etc.
-      def create(**options, &block)
+      # Add member to site.
+      # @param [Hash] options subscription parameters: email, etc.
+      def create(site_id:, **options, &block)
         call(
           method: :post,
-          path: "/lists/#{options.delete(:list_id)}/subscriptions",
+          path: "/sites/#{site_id}/subscriptions",
           data: options,
           &block
         )
       end
 
-      # Remove member from list.
-      # @param [Hash] options List parameters: email, etc.
-      def destroy(**options, &block)
+      # Remove subscription from site.
+      # @param [Hash] options subscription parameters: email, etc.
+      def destroy(site_id:, **options, &block)
         call(
           method: :delete,
-          path: "/lists/#{options.delete(:list_id)}/subscriptions",
+          path: "/sites/#{site_id}/subscriptions",
           data: options,
           &block
         )
       end
 
-      # Add tags for subscription
-      # @param [Integer] list_id
+      # Add tags to subscription
+      # @param [Integer] site_id
       # @param [String] email
       # @param [String] tags
       # @param [Hash] options: payload, etc
-      def tag(**options, &block)
+      def tag(site_id:, **options, &block)
         call(
           method: :post,
-          path: "/lists/#{options.delete(:list_id)}/subscriptions/tag",
+          path: "/sites/#{site_id}/subscriptions/tag",
+          data: options,
+          &block
+        )
+      end
+
+      # Add tags to subscription
+      # @param [Integer] site_id
+      # @param [String] email
+      # @param [String] tags
+      # @param [Hash] options: payload, etc
+      def untag(site_id:, **options, &block)
+        call(
+          method: :post,
+          path: "/sites/#{site_id}/subscriptions/untag",
           data: options,
           &block
         )
       end
 
       # Add external event for subscription
-      # @param [Integer] list_id
+      # @param [Integer] site_id
       # @param [String] email
       # @param [String] event
       # @param [Hash] options: payload, etc
-      def event(**options, &block)
+      def event(site_id:, **options, &block)
         call(
           method: :post,
-          path: "/lists/#{options.delete(:list_id)}/subscriptions/event",
+          path: "/sites/#{site_id}/subscriptions/event",
           data: options,
           &block
         )

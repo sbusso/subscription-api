@@ -1,10 +1,10 @@
 module Messenger
   module Resources
-    class List < Base
+    class Site < Base
 
       # Lists index.
       def list(&block)
-        call(method: :get, path: "/lists", &block)
+        call(method: :get, path: "/sites", &block)
       end
 
     end
