@@ -1,13 +1,12 @@
 module Messenger
   module Resources
 
-    autoload :Channel, 'messenger/resources/channel'
     autoload :Subscription, 'messenger/resources/subscription'
-    autoload :List, 'messenger/resources/list'
+    autoload :Site, 'messenger/resources/site'
 
     class Base
 
-      RESOURCES_LIST = [:channel, :subscription, :list]
+      RESOURCES_LIST = [:subscription, :site]
 
       attr_reader :client
 

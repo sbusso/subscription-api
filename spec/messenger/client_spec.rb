@@ -25,16 +25,12 @@ describe Messenger::Client do
   end
 
   describe "use api resources" do
-    it "use channel resource" do
-      expect(client.channels).to be_an_instance_of(Messenger::Resources::Channel)
-    end
-
     it "use subscription resource" do
       expect(client.subscriptions).to be_an_instance_of(Messenger::Resources::Subscription)
     end
 
-    it "use list resource" do
-      expect(client.lists).to be_an_instance_of(Messenger::Resources::List)
+    it "use site resource" do
+      expect(client.sites).to be_an_instance_of(Messenger::Resources::Site)
     end
   end
 
