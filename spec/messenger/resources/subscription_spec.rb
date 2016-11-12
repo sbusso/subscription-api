@@ -80,6 +80,16 @@ describe Messenger::Resources::Subscription do
         expect(api.event(site_id: 1, email: email, event: event, payload: payload).to_s).to include("added")
       end
 
+      it "updates subscription's email" do
+        email = "email@example.com"
+        new_email = "new_email@example.com"
+        site_id = 1
+        stub_request(:post, "http://api-key:@site.com/api/sites/1/subscriptions/update_email")
+          .with(body: {email: email, new_email: new_email})
+          .to_return(:body => {message: "Subscription's email was changed"}.to_json)
+        expect(api.update_email(site_id: 1, email: email, new_email: new_email).to_s).to include("changed")
+      end
+
   end
 
 
