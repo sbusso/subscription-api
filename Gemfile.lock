@@ -17,6 +17,7 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.4.0)
     awesome_print (1.6.1)
+    byebug (9.0.6)
     coderay (1.1.1)
     concurrent-ruby (1.0.2)
     crack (0.4.3)
@@ -74,6 +75,7 @@ PLATFORMS
 
 DEPENDENCIES
   awesome_print
+  byebug
   messenger!
   pry
   rake

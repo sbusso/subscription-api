@@ -3,6 +3,7 @@ module Messenger
 
     autoload :Subscription, 'messenger/resources/subscription'
     autoload :Site, 'messenger/resources/site'
+    autoload :RecurringMessage, 'messenger/resources/recurring_message'
 
     class Base
 
