@@ -3,11 +3,11 @@ module Messenger
 
     autoload :Subscription, 'messenger/resources/subscription'
     autoload :Site, 'messenger/resources/site'
-    autoload :RecurringMessage, 'messenger/resources/recurring_message'
+    autoload :Recurring, 'messenger/resources/recurring'
 
     class Base
 
-      RESOURCES_LIST = [:subscription, :site]
+      RESOURCES_LIST = [:subscription, :site, :recurring]
 
       attr_reader :client
 

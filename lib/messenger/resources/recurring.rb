@@ -1,10 +1,10 @@
 module Messenger
   module Resources
-    class RecurringMessage < Base
+    class Recurring < Base
 
       # Send message for specified recurring campaign
       # @param [Hash] options subscription parameters: email, etc.
-      def create(recurring_id:, **options, &block)
+      def send_message(recurring_id:, **options, &block)
         call(
           method: :post,
           path: "/campaigns/recurrings/#{recurring_id}/messages",
