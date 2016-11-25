@@ -20,5 +20,4 @@ describe Messenger::Resources::Site do
       end
   end
 
-
 end
