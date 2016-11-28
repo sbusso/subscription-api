@@ -19,15 +19,15 @@ describe Messenger::Resources::Subscription do
       it "single subscription create" do
         email = "email@example.com"
         stub_request(:post, "http://api-key:@site.com/api/sites/1/subscriptions")
-          .with(body: {member: {email: email}})
+          .with(body: {member: {email: email, tag: 'tag0'}})
           .to_return(:body => {message: "subscribed"}.to_json)
-        expect(api.create(site_id: 1, member: {email: email}).to_s).to include('subscribed')
+        expect(api.create(site_id: 1, member: {email: email, tag: 'tag0'}).to_s).to include('subscribed')
       end
 
       it "multiple subscription create" do
         email1 = "email@example.com"
         email2 = "email2@example.com"
-        members = [{email: email1}, {email: email2}]
+        members = [{email: email1, tag: 'tag0'}, {email: email2, tag: 'tag0'}]
         stub_request(:post, "http://api-key:@site.com/api/sites/1/subscriptions")
           .with(body: {members: members})
           .to_return(:body => {message: "subscribed"}.to_json)
@@ -37,15 +37,15 @@ describe Messenger::Resources::Subscription do
       it "single subscription destroy" do
         email = "email@example.com"
         stub_request(:delete, "http://api-key:@site.com/api/sites/1/subscriptions")
-          .with(body: {member: {email: email}})
+          .with(body: {member: {email: email, tag: 'tag0'}})
           .to_return(:body => {message: "unsubscribed"}.to_json)
-        expect(api.destroy(site_id: 1, member: {email: email}).to_s).to include("unsubscribed")
+        expect(api.destroy(site_id: 1, member: {email: email, tag: 'tag0'}).to_s).to include("unsubscribed")
       end
 
       it "multiple subscription destroy" do
         email1 = "email@example.com"
         email2 = "email2@example.com"
-        members = [{email: email1}, {email: email2}]
+        members = [{email: email1, tag: 'tag0'}, {email: email2, tag: 'tag0'}]
         stub_request(:delete, "http://api-key:@site.com/api/sites/1/subscriptions")
           .with(body: {members: members})
           .to_return(:body => {message: "unsubscribed"}.to_json)
@@ -78,6 +78,16 @@ describe Messenger::Resources::Subscription do
           .with(body: {email: email, event: event, payload: payload})
           .to_return(:body => {message: "Event was added to subscription"}.to_json)
         expect(api.event(site_id: 1, email: email, event: event, payload: payload).to_s).to include("added")
+      end
+
+      it "updates subscription's email" do
+        email = "email@example.com"
+        new_email = "new_email@example.com"
+        site_id = 1
+        stub_request(:post, "http://api-key:@site.com/api/sites/1/subscriptions/update_email")
+          .with(body: {email: email, new_email: new_email})
+          .to_return(:body => {message: "Subscription's email was changed"}.to_json)
+        expect(api.update_email(site_id: 1, email: email, new_email: new_email).to_s).to include("changed")
       end
 
   end

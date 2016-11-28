@@ -60,12 +60,21 @@ module Messenger
       # Add external event for subscription
       # @param [Integer] site_id
       # @param [String] email
-      # @param [String] event
-      # @param [Hash] options: payload, etc
+      # @param [String] new_email
       def event(site_id:, **options, &block)
         call(
           method: :post,
           path: "/sites/#{site_id}/subscriptions/event",
+          data: options,
+          &block
+        )
+      end
+
+      # Update
+      def update_email(site_id:, **options, &block)
+        call(
+          method: :post,
+          path: "/sites/#{site_id}/subscriptions/update_email",
           data: options,
           &block
         )
