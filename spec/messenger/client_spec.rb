@@ -100,10 +100,24 @@ describe Messenger::Client do
         .to_return(:body => {message: "Subscription's email was changed"}.to_json)
       expect(client.update_subscription_email(email: email, new_email: new_email).to_s).to include("changed")
     end
-
   end
 
+  context 'sites' do
+    let(:api_key) { "api-key" }
+    let(:url_prefix) { "http://site.com/api" }
+    let(:client)  { Messenger::Client.new(api_key: api_key, url_prefix: url_prefix) }
+    let(:api) { Messenger::Resources::Site.new(client: client) }
 
+    def compose_url(path)
+      prefix = URI(url_prefix)
+      "#{prefix.host}#{prefix.path}#{path}"
+    end
 
+    it "#all_sites" do
+      stub_request(:get, /.*#{compose_url("\/sites")}/).
+      to_return(:body => {sites:[]}.to_json )
+      expect(client.all_sites).to include("sites")
+    end
+  end
 
 end

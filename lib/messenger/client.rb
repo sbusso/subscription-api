@@ -22,6 +22,9 @@ module Messenger
       @url_prefix = url_prefix
     end
 
+    ###########################
+    ## Subscriptions actions ##
+    ###########################
 
     def all_subscriptions(&block)
       subscriptions.list(&block)
@@ -49,6 +52,14 @@ module Messenger
 
     def update_subscription_email(options, &block)
       subscriptions.update_email(options, &block)
+    end
+
+    ###########################
+    ###### Sites actions ######
+    ###########################
+
+    def all_sites(&block)
+      sites.list(&block)
     end
   end
 
