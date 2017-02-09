@@ -18,10 +18,38 @@ module Messenger
     # A new API client.
     # @param [Hash] options API key, API url prefix.
     def initialize(api_key:, url_prefix:)
-        @api_key = api_key
-        @url_prefix = url_prefix
+      @api_key = api_key
+      @url_prefix = url_prefix
     end
 
+
+    def all_subscriptions(&block)
+      subscriptions.list(&block)
+    end
+
+    def subscribe(options, &block)
+      subscriptions.create(options, &block)
+    end
+
+    def unsubscribe(options, &block)
+      subscriptions.destroy(options, &block)
+    end
+
+    def untag_subscription(options, &block)
+      subscriptions.untag(options, &block)
+    end
+
+    def tag_subscription(options, &block)
+      subscriptions.tag(options, &block)
+    end
+
+    def event_subscription(options, &block)
+      subscriptions.event(options, &block)
+    end
+
+    def update_subscription_email(options, &block)
+      subscriptions.update_email(options, &block)
+    end
   end
 
 end

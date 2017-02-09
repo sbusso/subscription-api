@@ -19,9 +19,9 @@ describe Messenger::Resources::Subscription do
       it "single subscription create" do
         email = "email@example.com"
         stub_request(:post, "http://api-key:@site.com/api/subscriptions")
-          .with(body: {member: {email: email, tag: 'tag0'}})
+          .with(body: {email: email, tag: 'tag0'})
           .to_return(:body => {message: "subscribed"}.to_json)
-        expect(api.create(member: {email: email, tag: 'tag0'}).to_s).to include('subscribed')
+        expect(api.create(email: email, tag: 'tag0').to_s).to include('subscribed')
       end
 
       it "multiple subscription create" do
@@ -37,9 +37,9 @@ describe Messenger::Resources::Subscription do
       it "single subscription destroy" do
         email = "email@example.com"
         stub_request(:delete, "http://api-key:@site.com/api/subscriptions")
-          .with(body: {member: {email: email, tag: 'tag0'}})
+          .with(body: {email: email, tag: 'tag0'})
           .to_return(:body => {message: "unsubscribed"}.to_json)
-        expect(api.destroy(member: {email: email, tag: 'tag0'}).to_s).to include("unsubscribed")
+        expect(api.destroy({email: email, tag: 'tag0'}).to_s).to include("unsubscribed")
       end
 
       it "multiple subscription destroy" do
