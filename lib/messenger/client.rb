@@ -61,6 +61,18 @@ module Messenger
     def all_sites(&block)
       sites.list(&block)
     end
+
+    ###########################
+    #### Recurring actions ####
+    ###########################
+
+    def all_recurrings(&block)
+      recurrings.list(&block)
+    end
+
+    def send_recurring_message(options, &block)
+      recurrings.send_message(options, &block)
+    end
   end
 
 end

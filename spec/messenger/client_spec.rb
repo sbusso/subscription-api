@@ -120,4 +120,28 @@ describe Messenger::Client do
     end
   end
 
+  context 'recurring' do
+    let(:api_key) { "api-key" }
+    let(:recurring_id) { 'uuid' }
+    let(:url_prefix) { "http://site.com/api" }
+    let(:client)  { Messenger::Client.new(api_key: api_key, url_prefix: url_prefix) }
+    let(:api) { described_class.new(client: client) }
+
+    it "#all_recurrings" do
+      body_response = [].to_json
+      stub_request(:get, "http://api-key:@site.com/api/campaigns/recurrings")
+        .to_return(:body => body_response)
+      expect(client.all_recurrings).to eq([])
+    end
+    
+    it "#send_recurring_message" do
+      stub_request(:post, "http://api-key:@site.com/api/campaigns/recurrings/#{recurring_id}/messages")
+        .with(body: {subject: 'subject', body: 'body'})
+        .to_return(:body => {message: "Message sent"}.to_json)
+      expect(client.send_recurring_message(recurring_id: recurring_id, subject: 'subject', body: 'body').to_s).to include('Message sent')
+    end
+  end
+
+
+
 end
