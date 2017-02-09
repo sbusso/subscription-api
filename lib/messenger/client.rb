@@ -26,30 +26,37 @@ module Messenger
     ## Subscriptions actions ##
     ###########################
 
+    # List of site subscriptions
     def all_subscriptions(&block)
       subscriptions.list(&block)
     end
 
+    # Subscribe person to site
     def subscribe(options, &block)
       subscriptions.create(options, &block)
     end
 
+    # Unsubscribe person from site
     def unsubscribe(options, &block)
       subscriptions.destroy(options, &block)
     end
 
+    # Untag person from site
     def untag_subscription(options, &block)
       subscriptions.untag(options, &block)
     end
 
+    # Tag person to site
     def tag_subscription(options, &block)
       subscriptions.tag(options, &block)
     end
 
+    # Add external event to subscription
     def event_subscription(options, &block)
       subscriptions.event(options, &block)
     end
 
+    # Update subscription email
     def update_subscription_email(options, &block)
       subscriptions.update_email(options, &block)
     end
@@ -58,6 +65,7 @@ module Messenger
     ###### Sites actions ######
     ###########################
 
+    # returns all available sites
     def all_sites(&block)
       sites.list(&block)
     end
@@ -66,10 +74,12 @@ module Messenger
     #### Recurring actions ####
     ###########################
 
+    # returns all available recurrings
     def all_recurrings(&block)
       recurrings.list(&block)
     end
 
+    # send recurring message 
     def send_recurring_message(options, &block)
       recurrings.send_message(options, &block)
     end
