@@ -13,11 +13,11 @@ describe Messenger::Resources::Site do
   end
 
   describe "Api methods" do
-      it "Sites list" do
-        stub_request(:get, /.*#{compose_url("\/sites")}/).
-        to_return(:body => {sites:[]}.to_json )
-        expect(api.list).to include("sites")
-      end
+    it "Sites list" do
+      stub_request(:get, /.*#{compose_url("\/sites")}/).
+      to_return(:body => {sites:[]}.to_json )
+      expect(api.list).to include("sites")
+    end
   end
 
 end
