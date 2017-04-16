@@ -16,8 +16,8 @@ Gem::Specification.new do |s|
 
   s.files = Dir["{app,config,db,lib}/**/*", "Rakefile", "README.rdoc"]
   s.test_files = Dir["spec/**/*"]
-  s.add_runtime_dependency 'rest-client', '~> 1.8.0'
-  s.add_runtime_dependency 'hashie',                         '>= 2.0'
+  s.add_runtime_dependency 'rest-client'#, '~> 1.8.0'
+  s.add_runtime_dependency 'hashie'#,                         '>= 2.0'
   s.add_runtime_dependency 'multi_json',                     '>= 1.3'
   s.add_runtime_dependency 'activesupport'
 
