@@ -9,11 +9,9 @@ module Messenger
     # @return [String]
     attr_reader :api_key
 
-
     # URL prefix for calling API methods.
     # @return [String]
     attr_reader :url_prefix
-
 
     # A new API client.
     # @param [Hash] options API key, API url prefix.
@@ -22,9 +20,7 @@ module Messenger
       @url_prefix = url_prefix
     end
 
-    ###########################
-    ## Subscriptions actions ##
-    ###########################
+    ## Subscriptions actions
 
     # List of site subscriptions
     def all_subscriptions(&block)
@@ -36,24 +32,42 @@ module Messenger
       subscriptions.create(options, &block)
     end
 
-    # Unsubscribe person from site
+    # Unsubscribe subscriber
     def unsubscribe(options, &block)
       subscriptions.destroy(options, &block)
     end
 
-    # Untag person from site
-    def untag_subscription(options, &block)
-      subscriptions.untag(options, &block)
-    end
-
-    # Tag person to site
+    # Tag subscriber
+    # DEPRECATED
     def tag_subscription(options, &block)
       subscriptions.tag(options, &block)
     end
 
-    # Add external event to subscription
+    # Tag subscriber
+    def tag(email, tags)
+      subscriptions.tag(email: email, tags: tags)
+    end
+
+    # Untag subscriber
+    # DEPRECATED
+    def untag_subscription(options, &block)
+      subscriptions.untag(options, &block)
+    end
+
+    # Untag subscriber
+    def untag(email, tags)
+      subscriptions.untag(email: email, tags: tags)
+    end
+
+    # Add external event to subscriber
+    # DEPRECATED
     def event_subscription(options, &block)
       subscriptions.event(options, &block)
+    end
+
+    # Add external event to subscriber
+    def add_event(email, event, payload = {})
+      subscriptions.event(email: email, event: event, payload: payload)
     end
 
     # Update subscription email
@@ -61,25 +75,21 @@ module Messenger
       subscriptions.update_email(options, &block)
     end
 
-    ###########################
-    ###### Sites actions ######
-    ###########################
+    ## Sites actions
 
     # returns all available sites
     def all_sites(&block)
       sites.list(&block)
     end
 
-    ###########################
-    #### Recurring actions ####
-    ###########################
+    ## Recurring actions ####
 
     # returns all available recurrings
     def all_recurrings(&block)
       recurrings.list(&block)
     end
 
-    # send recurring message 
+    # send recurring message
     def send_recurring_message(options, &block)
       recurrings.send_message(options, &block)
     end

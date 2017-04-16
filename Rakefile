@@ -16,17 +16,11 @@ end
 
 Bundler::GemHelper.install_tasks
 
-require 'rake/testtask'
+require 'rspec/core/rake_task'
 
-Rake::TestTask.new(:test) do |t|
-  t.libs << 'lib'
-  t.libs << 'spec'
-  # t.pattern = 'spec/**/*_spec.rb'
-  t.test_files = FileList['spec/**/*_spec.rb']
-  # t.verbose = false
+RSpec::Core::RakeTask.new(:spec) do |t|
+  t.pattern = Dir.glob('spec/**/*_spec.rb')
+  t.rspec_opts = '--color --format documentation'
 end
 
-
-task default: :test
-
-# task :test => :spec
+task :default => :spec

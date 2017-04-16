@@ -16,7 +16,7 @@ describe Messenger::Resources::Subscription do
         expect(api.list).to include("subscriptions")
       end
 
-      it "single subscription create" do
+      it "single subscription creation" do
         email = "email@example.com"
         stub_request(:post, "http://api-key:@site.com/api/subscriptions")
           .with(body: {email: email, tag: 'tag0'})
@@ -24,7 +24,7 @@ describe Messenger::Resources::Subscription do
         expect(api.create(email: email, tag: 'tag0').to_s).to include('subscribed')
       end
 
-      it "multiple subscription create" do
+      it "multiple subscription creation" do
         email1 = "email@example.com"
         email2 = "email2@example.com"
         members = [{email: email1, tag: 'tag0'}, {email: email2, tag: 'tag0'}]
@@ -34,7 +34,7 @@ describe Messenger::Resources::Subscription do
         expect(api.create(members: members).to_s).to include('subscribed')
       end
 
-      it "single subscription destroy" do
+      it "single subscription deletation" do
         email = "email@example.com"
         stub_request(:delete, "http://api-key:@site.com/api/subscriptions")
           .with(body: {email: email, tag: 'tag0'})
@@ -42,7 +42,7 @@ describe Messenger::Resources::Subscription do
         expect(api.destroy({email: email, tag: 'tag0'}).to_s).to include("unsubscribed")
       end
 
-      it "multiple subscription destroy" do
+      it "multiple subscription deletation" do
         email1 = "email@example.com"
         email2 = "email2@example.com"
         members = [{email: email1, tag: 'tag0'}, {email: email2, tag: 'tag0'}]
@@ -70,7 +70,7 @@ describe Messenger::Resources::Subscription do
         expect(api.untag(email: email, tags: tags).to_s).to include("removed")
       end
 
-      it "subscription event" do
+      it "add event to subscriber" do
         email = "email@example.com"
         event = "payment"
         payload = {'price'=> '10'}

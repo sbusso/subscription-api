@@ -1,5 +1,7 @@
 ## Installation
 
+OUTDATED
+
 ``` ruby
 # Gemfile
 gem 'messenger', github: 'turfmedia/messenger-client'

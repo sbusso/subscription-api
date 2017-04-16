@@ -46,7 +46,7 @@ describe Messenger::Client do
         .to_return(:body => body_response)
       expect(client.all_subscriptions).to include("subscriptions")
     end
-    
+
     it "#subscribe" do
       email = "email@example.com"
       stub_request(:post, "http://api-key:@site.com/api/subscriptions")
@@ -54,7 +54,7 @@ describe Messenger::Client do
         .to_return(:body => {message: "subscribed"}.to_json)
       expect(client.subscribe(email: email, tag: 'tag0').to_s).to include('subscribed')
     end
-  
+
     it "#unsubscribe" do
       email = "email@example.com"
       stub_request(:delete, "http://api-key:@site.com/api/subscriptions")
@@ -62,8 +62,8 @@ describe Messenger::Client do
         .to_return(:body => {message: "unsubscribed"}.to_json)
       expect(client.unsubscribe(email: email, tag: 'tag0').to_s).to include("unsubscribed")
     end
-    
-    
+
+
     it "#tag_subscription" do
       email = "email@example.com"
       tags = ["tag0", "tag1"]
@@ -72,6 +72,16 @@ describe Messenger::Client do
         .to_return(:body => {message: "Tag(s) was added to subscription"}.to_json)
       expect(client.tag_subscription(email: email, tags: tags).to_s).to include("added")
     end
+
+    it "#tag" do
+      email = "email@example.com"
+      tags = ["tag0", "tag1"]
+      stub_request(:post, "http://api-key:@site.com/api/subscriptions/tag")
+        .with(body: {email: email, tags: tags})
+        .to_return(:body => {message: "Tag(s) was added to subscription"}.to_json)
+      expect(client.tag(email, tags).to_s).to include("added")
+    end
+
 
     it "#untag_subscription" do
       email = "email@example.com"
@@ -82,6 +92,15 @@ describe Messenger::Client do
       expect(client.untag_subscription(email: email, tags: tags).to_s).to include("removed")
     end
 
+    it "#untag" do
+      email = "email@example.com"
+      tags = ["tag0", "tag1"]
+      stub_request(:post, "http://api-key:@site.com/api/subscriptions/untag")
+        .with(body: {email: email, tags: tags})
+        .to_return(:body => {message: "Tag(s) was removed from subscription"}.to_json)
+      expect(client.untag(email, tags).to_s).to include("removed")
+    end
+
     it " #event_subscription" do
       email = "email@example.com"
       event = "payment"
@@ -90,6 +109,16 @@ describe Messenger::Client do
         .with(body: {email: email, event: event, payload: payload})
         .to_return(:body => {message: "Event was added to subscription"}.to_json)
       expect(client.event_subscription(email: email, event: event, payload: payload).to_s).to include("added")
+    end
+
+    it " #add_event" do
+      email = "email@example.com"
+      event = "payment"
+      payload = {'price'=> '10'}
+      stub_request(:post, "http://api-key:@site.com/api/subscriptions/event")
+        .with(body: {email: email, event: event, payload: payload})
+        .to_return(:body => {message: "Event was added to subscription"}.to_json)
+      expect(client.add_event(email, event, payload).to_s).to include("added")
     end
 
     it "#update_subscription_email" do
@@ -133,7 +162,7 @@ describe Messenger::Client do
         .to_return(:body => body_response)
       expect(client.all_recurrings).to eq([])
     end
-    
+
     it "#send_recurring_message" do
       stub_request(:post, "http://api-key:@site.com/api/campaigns/recurrings/#{recurring_id}/messages")
         .with(body: {subject: 'subject', body: 'body'})
